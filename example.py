@@ -6,11 +6,15 @@ import datetime
 # label='t = '+str(t[i])
 def plot(x, y, axis_labels=['x','y'], legend=False, tick_label_size='large'):
     # Figure and Plot Definition
-    fig, ax = plt.subplots(figsize=(14,10))
+    fig, ax = plt.subplots(figsize=(10,8))
     plt.plot(x, y)
     # Setting Axis Labels
-    plt.xlabel(axis_labels[0])
-    plt.ylabel(axis_labels[1])
+    # Pyplot
+    #plt.xlabel(axis_labels[0]) 
+    #plt.ylabel(axis_labels[1])
+    # OOP implementation
+    ax.set_xlabel(axis_labels[0])  
+    ax.set_ylabel(axis_labels[1])
     # Legend
     if legend is True:
         plt.legend()
@@ -18,22 +22,17 @@ def plot(x, y, axis_labels=['x','y'], legend=False, tick_label_size='large'):
     if datetime.datetime in x:
         ax.xaxis.set_major_formatter(mdates.DateFormatter(partdatenameformat))
     # Tick Sizes
-    '''
     def set_tick_size(fontsize):
         for tick in ax.xaxis.get_major_ticks():
-            tick.label.set_fontsize(25)
+            tick.label.set_fontsize(fontsize)
         for tick in ax.yaxis.get_major_ticks():
-            tick.label.set_fontsize(25)
-    '''
+            tick.label.set_fontsize(fontsize)
     if tick_label_size == 'large':
-        #set_tick_size(25)
-        plt.xticks(fontsize = 25)
+        set_tick_size(25)
     elif tick_label_size == 'medium':
-        #set_tick_size(17.5)
-        plt.xticks(fontsize = 12.5)
+        set_tick_size(17.5)
     elif tick_label_size == 'small':
-        #set_tick_size(5)
-        plt.xticks(fontsize = 5)
+        set_tick_size(5)
     # Save Figure
     #savefig('plot.png', transparent=True)
     plt.show()
@@ -53,6 +52,6 @@ labels=['x', 'f(x)']
 # Plotting
 #for i in range(len(t)):
 y = A*np.cos(k*x-w*t)
-plot(x, y)
+plot(x, y, axis_labels=labels)
     
 
