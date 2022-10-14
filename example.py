@@ -4,40 +4,47 @@ import datetime
 #import pandas
 
 # label='t = '+str(t[i])
-def plot(x, y, axis_labels=['x','y'], legend=False, tick_label_size='large'):
+def plot(x, y, axis_labels=['x','y'], legend=False, tick_label_size='small'):
+    # Defaults
+    default_axis_labels = ['x','y']
+    default_tick_font_size = 10
+    default_figure_size = (12,8)
+
     # Figure and Plot Definition
-    fig, ax = plt.subplots(figsize=(10,8))
-    plt.plot(x, y)
+    fig, ax = plt.subplots(figsize=default_figure_size)
+
     # Setting Axis Labels
-    # Pyplot
     #plt.xlabel(axis_labels[0]) 
     #plt.ylabel(axis_labels[1])
-    # OOP implementation
     ax.set_xlabel(axis_labels[0])  
     ax.set_ylabel(axis_labels[1])
+
     # Legend
     if legend is True:
         plt.legend()
+
     # Datetime Labels
     if datetime.datetime in x:
         ax.xaxis.set_major_formatter(mdates.DateFormatter(partdatenameformat))
+
     # Tick Sizes
     def set_tick_size(fontsize):
-        for tick in ax.xaxis.get_major_ticks():
-            tick.label.set_fontsize(fontsize)
-        for tick in ax.yaxis.get_major_ticks():
-            tick.label.set_fontsize(fontsize)
+        ax.tick_params(axis='x', labelsize=fontsize)
+        ax.tick_params(axis='y', labelsize=fontsize)
     if tick_label_size == 'large':
         set_tick_size(25)
     elif tick_label_size == 'medium':
         set_tick_size(17.5)
     elif tick_label_size == 'small':
-        set_tick_size(5)
-    # Save Figure
+        set_tick_size(10)
+
+    # Plot and Save Figure
+    ax.plot(x, y)
     #savefig('plot.png', transparent=True)
-    plt.show()
+    #plt.show()
     return
 
+'''
 # Wave Parameters:
 A = 1           # Amplitude
 k = 2           # Wavenumber 
@@ -53,5 +60,4 @@ labels=['x', 'f(x)']
 #for i in range(len(t)):
 y = A*np.cos(k*x-w*t)
 plot(x, y, axis_labels=labels)
-    
-
+'''

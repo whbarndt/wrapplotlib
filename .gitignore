@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Added by "whbarndt"
+/baseline_images
+/result_images
+*.png
+testing_tests.py
