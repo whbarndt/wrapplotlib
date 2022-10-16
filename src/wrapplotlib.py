@@ -11,7 +11,7 @@ args = {
     'width': 10,
 }
 
-def bar_chart(x, y, args):
+def plot(x, y, args):
     plt.figure(figsize=(args['width'], args['height']))
     plt.bar(x, y, color=args['color'])
     plt.title(args['title'])
