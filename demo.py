@@ -1,0 +1,25 @@
+import wrapplotlib as wrap
+import numpy as np
+
+# Bar
+fruits = ['apple', 'blueberry', 'cherry', 'orange']
+counts = [40, 100, 30, 55]
+
+params = {
+    'title': 'Fruit supply by kind and color',
+    'ylabel': 'fruit supply',
+    'legend': True,
+    'legend_title': 'Fruit color',
+    'bar_labels': ['red', 'blue', '_red', 'orange'],
+    'bar_colors': ['tab:red', 'tab:blue', 'tab:red', 'tab:orange']
+}
+
+# Works - wrap.plot()
+# Still needs to be implemented - wrap.plot(fruits, counts, type='bar', args=params)
+
+# Plot Test
+x = np.linspace(0,2*np.pi)
+y = np.tan(x)
+
+# Works - wrap.plot(type='2dplot')
+# Works - wrap.plot(x, y, type='2dplot')
