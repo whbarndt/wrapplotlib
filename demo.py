@@ -1,4 +1,4 @@
-import wrapplotlib as wrap
+import src.wrapplotlib as wrap
 import numpy as np
 
 # Bar
