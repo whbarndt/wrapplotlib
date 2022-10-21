@@ -1,4 +1,4 @@
-import wrapplotlib as wrap
+import src.wrapplotlib as wrap
 import numpy as np
 
 # Bar
@@ -14,12 +14,12 @@ params = {
     'bar_colors': ['tab:red', 'tab:blue', 'tab:red', 'tab:orange']
 }
 
-# Works - wrap.plot()
+wrap.plot()
 # Still needs to be implemented - wrap.plot(fruits, counts, type='bar', args=params)
 
 # Plot Test
 x = np.linspace(0,2*np.pi)
 y = np.tan(x)
 
-# Works - wrap.plot(type='2dplot')
-# Works - wrap.plot(x, y, type='2dplot')
+#wrap.plot(type='2dplot')
+#wrap.plot(x, y, type='2dplot')

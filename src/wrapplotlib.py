@@ -18,7 +18,7 @@ default_bar_args = {
     'linewidth': 0.7,
     'legend': False,
     'legend_title': 'Legend',
-    'bar_labels': None,
+    'custom_bar_labels': None,
     'transparent': False,
 }
 
@@ -41,33 +41,42 @@ default_plot_args = {
     'transparent': False,
 }
 
-def plot(x = [0], y = [0], type='bar', args=default_bar_args, savefig=False):
-    ## 2D Plot
-    if type == '2dplot':
-        args = default_plot_args
-        # Demo Condition
-        if any(x) == False and any(y) == False:
-            x = np.linspace(0, 2*np.pi)
-            y = np.sin(x)
-            args['title'] = 'Plot of Sine(x) from 0 to 2pi'
-        fig, ax = plt.subplots(figsize=(args['figure_width'], args['figure_height']))
-        ax.plot(x, y, color=args['color'])
-        # Date Time Format Setting
-        if dt.datetime in x:
-            ax.xaxis.set_major_formatter(mdates.DateFormatter(args['datetime-format']))
-    
+# Bar Plot Demo Variables:
+bar_demo_x = ['C', 'C++', 'Java', 'Python', 'Rust']
+bar_demo_y = [15, 30, 20, 35, 75]
+
+# 2D Plot Demo Variables:
+plot_demo_x = np.linspace(0, 2*np.pi)
+plot_demo_y = np.sin(plot_demo_x)
+
+def plot(x = np.ones(1), y = np.ones(1), type='bar', args=default_bar_args, showfig=True, savefig=False, savefigname="default.png"):
+   
     ## Bar Chart
-    elif type == 'bar':
+    if type == 'bar':
         # Demo Condition
-        if any(x) == False and any(y) == False:
-            x = ['C', 'C++', 'Java', 'Python', 'Rust']
-            y = [15, 30, 20, 35, 75]
+        if all(x) == True and all(y) == True:
+            x = bar_demo_x
+            y = bar_demo_y
             args['title'] = 'Students enrolled in different courses'
             args['xlabel'] = 'Courses offered'
             args['ylabel'] = 'No. of students enrolled'
         fig, ax = plt.subplots(figsize=(args['figure_width'], args['figure_height']))
-        ax.bar(x, y, label=args['bar_labels'], color=args['bar_colors'])
-
+        plot = ax.bar(x, y, label=args['custom_bar_labels'], color=args['bar_colors'])
+    
+    ## 2D Plot
+    elif type == '2dplot':
+        args = default_plot_args
+        # Demo Condition
+        if all(x) == True and all(y) == True:
+            x = plot_demo_x
+            y = plot_demo_y
+            args['title'] = 'Plot of Sine(x) from 0 to 2pi'
+        fig, ax = plt.subplots(figsize=(args['figure_width'], args['figure_height']))
+        plot = ax.plot(x, y, color=args['color'])
+        # Date Time Format Setting
+        if dt.datetime in x:
+            ax.xaxis.set_major_formatter(mdates.DateFormatter(args['datetime-format']))
+    
     ## Universal Settings
     
     # Title, x and y label
@@ -92,5 +101,7 @@ def plot(x = [0], y = [0], type='bar', args=default_bar_args, savefig=False):
         set_xy_ticksize(args['ticklabelsize'])
     # Save Figure Settings
     if savefig:
-        savefig(f"{args['title']}", transparent=args['transparent'])
-    plt.show()
+        plt.savefig(savefigname, transparent=args['transparent'])
+    if showfig:
+        plt.show()
+    return plot
