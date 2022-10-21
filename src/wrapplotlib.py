@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.dates as mdates
 import datetime as dt
+import copy
 
 default_bar_args = {
     'figure_height': 8,
@@ -13,13 +14,13 @@ default_bar_args = {
     'ylabel': 'Y Axis',
     'axislabelsize': 20,
     'ticklabelsize': 'medium',
-    'bar_colors': 'maroon',
+    'custom_bar_colors': 'maroon',
     'edgecolor': 'black',
     'linewidth': 0.7,
     'legend': False,
     'legend_title': 'Legend',
-    'custom_bar_labels': None,
     'transparent': False,
+    'bar_labels': None,   
 }
 
 default_plot_args = {
@@ -49,25 +50,37 @@ bar_demo_y = [15, 30, 20, 35, 75]
 plot_demo_x = np.linspace(0, 2*np.pi)
 plot_demo_y = np.sin(plot_demo_x)
 
-def plot(x = np.ones(1), y = np.ones(1), type='bar', args=default_bar_args, showfig=True, savefig=False, savefigname="default.png"):
+# Updates passed in dictionary - allows for variable amount of arguments to be passed
+def get_updated_dict(given_dict, set_dict):
+    set_key_list = list(set_dict.keys())
+    given_key_list = list(given_dict.keys())
+    new_dict = copy.deepcopy(set_dict)
+    for i in set_key_list:
+        for j in given_key_list:
+            if i == j:
+                new_dict[i] = given_dict[j]
+    return new_dict
+
+def plot(x = np.zeros(5), y = np.zeros(5), type='bar', args=default_bar_args, showfig=True, savefig=False, savefigname="default.png"):
    
     ## Bar Chart
     if type == 'bar':
+        args = get_updated_dict(args, default_bar_args)
         # Demo Condition
-        if all(x) == True and all(y) == True:
+        if np.array_equal(x, np.zeros(5)) and np.array_equal(y, np.zeros(5)):
             x = bar_demo_x
             y = bar_demo_y
             args['title'] = 'Students enrolled in different courses'
             args['xlabel'] = 'Courses offered'
             args['ylabel'] = 'No. of students enrolled'
         fig, ax = plt.subplots(figsize=(args['figure_width'], args['figure_height']))
-        plot = ax.bar(x, y, label=args['custom_bar_labels'], color=args['bar_colors'])
+        plot = ax.bar(x, y, label=args['bar_labels'], color=args['custom_bar_colors'])
     
     ## 2D Plot
     elif type == '2dplot':
-        args = default_plot_args
+        args = get_updated_dict(args, default_plot_args)
         # Demo Condition
-        if all(x) == True and all(y) == True:
+        if np.array_equal(x, np.zeros(5)) and np.array_equal(y, np.zeros(5)):
             x = plot_demo_x
             y = plot_demo_y
             args['title'] = 'Plot of Sine(x) from 0 to 2pi'
@@ -85,7 +98,7 @@ def plot(x = np.ones(1), y = np.ones(1), type='bar', args=default_bar_args, show
     ax.set_ylabel(args['ylabel'], fontsize=args['axislabelsize'])
     # Legend
     if args['legend'] is True:
-        ax.legend()
+        ax.legend(title=args['legend_title'])
     # Axis Tick Labels Setting
     def set_xy_ticksize(num):
         ax.tick_params(axis='x', labelsize=num)
