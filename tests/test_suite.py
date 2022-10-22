@@ -57,28 +57,3 @@ def test_plot_2dplot_demo():
     assert compare_images(reference_image, test_image, thrshld) == None
     #os.remove(test_image)
     #os.remove(reference_image)
-
-'''def test_function_with_custom_labels():
-    custom_labels=['x', 'f(x)']
-    
-    ### TEST IMAGE ###
-    test_image = "./result_images/test/function_with_custom_labels.png"
-    # function_with_custom_labels.png - test
-    wrap.plot(x, y, axis_labels=custom_labels)
-    plt.savefig(test_image)
-    
-    ### REFERENCE IMAGE ###
-    reference_image = "./baseline_images/test/function_default.png"
-    # Figure Definition
-    fig, ax = plt.subplots(figsize=default_figure_size)
-    # Defaults
-    ax.tick_params(axis='x', labelsize=default_tick_font_size)
-    ax.tick_params(axis='y', labelsize=default_tick_font_size)
-    ## Customizations ##
-    ax.set_xlabel(custom_labels[0])
-    ax.set_ylabel(custom_labels[1])
-    # Plot
-    ax.plot(x, y)
-    plt.savefig(reference_image)
-    
-    assert compare_images(reference_image, test_image, thrshld) == None'''
