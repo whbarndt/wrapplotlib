@@ -1,6 +1,6 @@
 # wrapplotlib
 
-## Purpose
+## Purpose!
 To streamline the workflow of using matplotlib for basic data plotting
 
 ## Installation
